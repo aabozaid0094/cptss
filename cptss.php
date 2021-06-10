@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       CPT Swiper Slider
  * Plugin URI:        mailto:aabozaid0094@gmail.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Custom post type Swiper Slider WordPress plugin.
  * Version:           1.0.0
  * Author:            Ahmed Abo Zaid
  * Author URI:        mailto:aabozaid0094@gmail.com
