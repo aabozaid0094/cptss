@@ -98,7 +98,13 @@ class Cptss_Admin
 		 * class.
 		 */
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/cptss-admin.js', array('jquery'), $this->version, false);
+		// wp_enqueue_script('jquery-ui-tabs');
+		// wp_enqueue_script('wp-color-picker');
+		wp_register_script( 'wp-color-picker-alpha', plugin_dir_url(__FILE__) . 'js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ), $this->version, false );
+		wp_enqueue_style('wp-color-picker');
+		wp_enqueue_script('wp-color-picker-alpha');
+		wp_enqueue_script($this->plugin_name . 'bootstrap-tabs', plugin_dir_url(__FILE__) . 'js/bootstrap.min.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/cptss-admin.js', array('jquery', 'wp-color-picker-alpha'), $this->version, false);
 	}
 
 	/**
@@ -124,7 +130,7 @@ class Cptss_Admin
 				'show_ui' => true,
 				'menu_position' => 5,
 				'menu_icon' => 'dashicons-slides',
-				'supports' => array('title', 'custom-fields'),
+				'supports' => array('title'),
 			)
 		);
 	}

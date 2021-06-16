@@ -1,5 +1,5 @@
-(function( $ ) {
-	'use strict';
+(function ($) {
+	"use strict";
 
 	/**
 	 * All of the code for your admin-facing JavaScript source
@@ -29,4 +29,47 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-})( jQuery );
+	// $('#cptss-admin-metabox-tabs').tabs();
+	$(window).on("load", function () {
+		$('a[data-toggle="tab"]').on("shown.bs.tab", function () {
+			$(this).parents(".nav-tab-wrapper").find("a").removeClass("nav-tab-active");
+			$(this).addClass("nav-tab-active");
+		});
+
+		let cpt = $('#cptss-admin-metabox-tab-cpt select#cpt');
+		let taxonomy = $('#cptss-admin-metabox-tab-cpt select#taxonomy');
+		let term = $('#cptss-admin-metabox-tab-cpt select#term');
+		let options_reset = function(select){
+			select.find('option').each(function() {
+				if ($(this).attr('value')) {
+					$(this).css('display','none');
+				}
+			});
+		};
+		let update = function(parent, child, grand){
+			let parent_value = parent.value;
+			child.find('option').each(function() {
+				if ($(this).attr('parent_select')) {
+					let parent_select = $(this).attr('parent_select').split(',');
+					if (!parent_select.includes(parent_value)) {
+						$(this).css('display','none');
+					}
+					else {
+						$(this).css('display','block');
+					}
+				}
+			});
+			child[0].selectedIndex = 0;
+			if (grand) { grand[0].selectedIndex = 0; }
+		};
+		options_reset(taxonomy);
+		options_reset(term);
+		cpt.on('change', function(){
+			update(this, taxonomy, term);
+		});
+		taxonomy.on('change', function(){
+			update(this, term);
+		});
+		$('.cptss_color_field').wpColorPicker();
+	});
+})(jQuery);

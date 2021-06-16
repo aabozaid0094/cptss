@@ -2,3 +2,15 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+#cptss-admin-metabox-tabs li{margin-bottom:0;}
+#cptss-admin-metabox-tabs .tab-content>.tab-pane{display:none;}
+#cptss-admin-metabox-tabs .tab-content>.active{display:block;}
+#cptss-admin-metabox-tabs .meta-options textarea{width:100%;}
+#cptss-admin-metabox-tabs .meta-options p{background-color:#eee; padding:.5em; border-radius:5px;}
+#cptss-admin-metabox-tabs .meta-options p>*{display:block; margin-bottom:.5em;}
+#cptss-admin-metabox-tabs .meta-options p label{font-weight:700;}
+#cptss-admin-metabox-tabs .meta-options .number-wrap{display:flex; align-items:center;}
+#cptss-admin-metabox-tabs .meta-options .number-wrap input{flex-grow:1;}
+#cptss-admin-metabox-tabs .meta-options .number-wrap .number-prepend,
+#cptss-admin-metabox-tabs .meta-options .number-wrap .number-append
+{padding:4px 8px; background-color:rgba(255,255,255,.2); border:1px solid #8c8f94; border-radius:4px;}

@@ -79,6 +79,8 @@ class Cptss {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
+		$this->define_metabox_hooks();
+
 	}
 
 	/**
@@ -115,6 +117,11 @@ class Cptss {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cptss-admin.php';
+
+		/**
+		 * The class responsible for defining all actions needed with CPTSS post type metaboxes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cptss-admin-metaboxes.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -157,6 +164,7 @@ class Cptss {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'cptss_custom_post_type' );
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'cptss_custom_post_type' );
 
 	}
 
@@ -214,6 +222,22 @@ class Cptss {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Register all of the hooks related to CPTSS post type metaboxes.
+	 *
+	 * @since     1.0.0
+	 * @access     private
+	 */
+	private function define_metabox_hooks() {
+
+		$plugin_metaboxes = new Cptss_Admin_Metaboxes( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'add_meta_boxes', $plugin_metaboxes, 'add_metaboxes' );
+		$this->loader->add_action( 'add_meta_boxes_cptss', $plugin_metaboxes, 'set_meta' );
+		$this->loader->add_action( 'save_post_cptss', $plugin_metaboxes, 'validate_meta', 10, 2 );
+
 	}
 
 }
